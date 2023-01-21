@@ -1,4 +1,7 @@
 const cells = Array.from(document.querySelectorAll(".board div"));
+const alertWinner = document.querySelector('.restartGame');
+const winner = document.querySelector('.restartGame p');
+const restartButton = document.querySelector('.restartGame button');
 
 let currentPlayer = 'X';
 let gameOver = false;
@@ -29,10 +32,15 @@ function checkForWinner() {
     winningCombinations.forEach(combination => {
         const [a, b, c] = combination;
         if (cells[a].innerHTML === currentPlayer && cells[b].innerHTML === currentPlayer && cells[c].innerHTML === currentPlayer) {
-            alert(`${currentPlayer} is the winner`);
+            winner.innerHTML = `${currentPlayer} is the winner!`
+            alertWinner.style = 'display: flex'
             gameOver = true;
             cells.forEach(cell => cell.removeEventListener('click', handleClick));
-            
+
         }
     })
 }
+
+restartButton.addEventListener('click', () => {
+    location.reload()
+})
